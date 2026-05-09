@@ -3051,7 +3051,34 @@ void         SV_SpawnServer (const char *server)
 	pr_global_struct->serverflags = svs.serverflags;
 
 	ED_LoadFromFile (qcvm->worldmodel->entities);
+	// METALEX FIX: original Quake fish monster count bug.
+// In vanilla QuakeC, monster_fish can inflate total_monsters.
+// This corrects the displayed total monster count after entity spawn.
+{
+    int fish_count = 0;
+    int e;
+    edict_t *check;
+    const char *classname;
 
+    for (e = 1; e < qcvm->num_edicts; e++)
+    {
+        check = EDICT_NUM(e);
+
+        if (check->free)
+            continue;
+
+        classname = PR_GetString(check->v.classname);
+
+        if (classname && !strcmp(classname, "monster_fish"))
+            fish_count++;
+    }
+
+    if (fish_count > 0 && pr_global_struct->total_monsters >= fish_count)
+    {
+        pr_global_struct->total_monsters -= fish_count;
+        Con_DPrintf("METALEX FIX: fish count corrected, subtracted %i fish from total_monsters\n", fish_count);
+    }
+}
 	sv.active = true;
 
 	SV_Precache_Model ("progs/player.mdl"); // Spike -- SV_CreateBaseline depends on this model.

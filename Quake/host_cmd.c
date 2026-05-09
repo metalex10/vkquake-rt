@@ -2048,6 +2048,90 @@ static void Host_Give_f (void)
 		sv_player->v.ammo_shells = v;
 		break;
 
+	case 'q':
+	{
+		eval_t *super_damage_finished;
+
+		sv_player->v.items = (int)sv_player->v.items | IT_QUAD;
+
+		super_damage_finished = GetEdictFieldValue(
+			sv_player,
+			ED_FindFieldOffset("super_damage_finished")
+		);
+
+		if (super_damage_finished)
+		{
+			super_damage_finished->_float = qcvm->time + 99999;
+			SV_ClientPrintf("QUAD DAMAGE ACTIVADO\n");
+		}
+		else
+		{
+			SV_ClientPrintf("QUAD VISUAL ACTIVADO, PERO NO SE ENCONTRO super_damage_finished\n");
+		}
+
+		break;
+	}
+
+	case 'x':
+	{
+		eval_t *super_damage_finished;
+		eval_t *invincible_finished;
+
+		sv_player->v.items = (int)sv_player->v.items |
+			IT_SHOTGUN |
+			IT_SUPER_SHOTGUN |
+			IT_NAILGUN |
+			IT_SUPER_NAILGUN |
+			IT_GRENADE_LAUNCHER |
+			IT_ROCKET_LAUNCHER |
+			IT_LIGHTNING |
+			IT_QUAD |
+			IT_INVULNERABILITY;
+
+		sv_player->v.ammo_shells  = 999;
+		sv_player->v.ammo_nails   = 999;
+		sv_player->v.ammo_rockets = 999;
+		sv_player->v.ammo_cells   = 999;
+
+		sv_player->v.health = 999;
+
+		sv_player->v.armortype  = 0.8;
+		sv_player->v.armorvalue = 999;
+
+		sv_player->v.items =
+			(int)sv_player->v.items -
+			((int)sv_player->v.items &
+			(int)(IT_ARMOR1 | IT_ARMOR2 | IT_ARMOR3))
+			+ IT_ARMOR3;
+
+		super_damage_finished = GetEdictFieldValue(
+			sv_player,
+			ED_FindFieldOffset("super_damage_finished")
+		);
+
+		if (super_damage_finished)
+			super_damage_finished->_float = qcvm->time + 99999;
+
+		invincible_finished = GetEdictFieldValue(
+			sv_player,
+			ED_FindFieldOffset("invincible_finished")
+		);
+
+		if (invincible_finished)
+			invincible_finished->_float = qcvm->time + 99999;
+
+		SV_ClientPrintf("METALEX POWER ACTIVADO\n");
+		break;
+	}
+
+	case 'i':
+		// INVULNERABILIDAD
+		sv_player->v.items = (int)sv_player->v.items | 16384;
+		SV_ClientPrintf("INVULNERABILIDAD ACTIVADA\n");
+		break;
+
+	
+
 	case 'n':
 		if (rogue)
 		{

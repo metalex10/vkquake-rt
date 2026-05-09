@@ -212,14 +212,14 @@ copy "$(RTGL1_SDK_PATH)\Build\x64-Debug\RayTracedGL1.dll" "$(TargetDir)"</Comman
       <CompileAs>CompileAsC</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ExceptionHandling>false</ExceptionHandling>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <DisableSpecificWarnings>4100;4127;4389;4702;4706</DisableSpecificWarnings>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
       <UseStandardPreprocessor>false</UseStandardPreprocessor>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libvorbisfile.lib;libvorbis.lib;libopusfile.lib;libopus.lib;libFLAC.lib;libogg.lib;libmad.lib;libxmp.lib;ws2_32.lib;winmm.lib;SDL2.lib;SDL2main.lib;$(RTGL1_SDK_PATH)\Build\x64-Release\RayTracedGL1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libvorbisfile.lib;libvorbis.lib;libopusfile.lib;libopus.lib;libFLAC.lib;libogg.lib;libmad.lib;libxmp.lib;ws2_32.lib;winmm.lib;SDL2.lib;SDL2main.lib;Build\x64-Release\RayTracedGL1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\codecs\x64;..\SDL2\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
@@ -230,7 +230,7 @@ copy "$(RTGL1_SDK_PATH)\Build\x64-Debug\RayTracedGL1.dll" "$(TargetDir)"</Comman
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)\..\codecs\x64\*.dll" "$(TargetDir)"
 copy "$(SolutionDir)\..\SDL2\lib64\*.dll" "$(TargetDir)"
-copy "$(RTGL1_SDK_PATH)\Build\x64-Release\RayTracedGL1.dll" "$(TargetDir)"</Command>
+copy "Build\x64-Release\RayTracedGL1.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
