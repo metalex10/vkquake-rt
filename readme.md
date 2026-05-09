@@ -23,3 +23,9 @@ Steps:
 This is not neccesary anymore
 * Build the `vkQuake` solution
 * Copy `RayTracedGL1.dll` next to `vkQuake.exe` before running the executable
+
+if is neccesary, download this sh*t and unpack on you Quake folder, If possible, it should work on the Steam installation; I'm not sure if it will work in other installations or versions, it only works in the rerelease version.
+
+It does not contain any .pak files; you must add these from your purchased version of Quake 1!!!!!!!!!!
+
+https://www.mediafire.com/file/rmpun1bko5fyi0a/Quake+wtout+pak+files.rar/file
